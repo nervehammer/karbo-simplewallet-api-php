@@ -5,23 +5,23 @@ class Karbo {
 	/**
 	 * Host of Simplewallet JSON RPC API
 	 */
-	const RPC_HOST = "127.0.0.1";
+	const  RPC_HOST = "127.0.0.1";
 
 	/**
-	 * Port
+	 * Port: Need a unique port for each voter hence using 
 	 */
-	const RPC_PORT = "32348";
+	//	int RPC_PORT = $_POST["portno"];
 
 	/**
 	 * Username for authentication
 	 * Keep this field empty, if don't care about security of your KRB :)
 	 */
-	const RPC_USER = "USERNAME";
+	// RPC_USER = $_POST["username"];
 
 	/**
 	 * Password for authentication
 	 */
-	const RPC_PASSWORD = "PASSWORD";
+	 //RPC_PASSWORD = $_POST["password"];
 
 	/**
 	 * Version of JSON RPC
@@ -48,14 +48,16 @@ class Karbo {
 	/**
 	 * ID of request, you can put here whatever you want
 	 * (actually I don't now purpose of this field, maybe you find out it :D)
+	 * nervehammer: Adding php session id here ;)
 	 */
-	const ID_CONN = "Y7h2LgDrBVh7wbSj";
+	//const ID_CONN = session_id();
 
 	/**
 	 * Fee of transaction
 	 * (100000000 == 0.0001 KRB)
-	 */
-	const KRB_FEE = 100000000;
+ 	 */
+
+	const KRB_FEE = 000000000;
 
 	/**
 	 * Transaction mixin
@@ -81,11 +83,11 @@ class Karbo {
 	 * @param bool [$rpc_ssl] Type of connection
 	 */
 	public function __construct($rpc_host = "", $rpc_port = "", $rpc_ssl = false) {
-		$this->id_connection = self::ID_CONN;
+		$this->id_connection = session_id();
 		$this->service_host = self::RPC_HOST;
-		$this->service_port = self::RPC_PORT;
-		$this->service_user = self::RPC_USER;
-		$this->service_password = self::RPC_PASSWORD;
+		$this->service_port = $_POST["portno"];
+		$this->service_user = $_POST["username"];
+		$this->service_password = $_POST["password"];
 		$this->service_mixin = self::KRB_MIXIN;
 		$this->service_fee = self::KRB_FEE;
 
@@ -94,7 +96,7 @@ class Karbo {
 			$this->service_port = $rpc_port;
 		}
 
-		if (!empty(self::RPC_USER) && !empty(self::RPC_PASSWORD)) {
+		if (!empty($_POST["username"]) && !empty($_POST["password"])) {
 			$this->service_auth = true;
 		}
 
