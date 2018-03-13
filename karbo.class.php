@@ -209,8 +209,8 @@ class Karbo {
 					$result["status"] = true;
 					if (isset($data["result"]["available_balance"])) {
 						$result["status"] = true;
-						$result["available_balance"] = self::balanceFormat($data["result"]["available_balance"], false);
-						$result['locked_amount'] = self::balanceFormat($data["result"]["locked_amount"], false);
+						$result["available_balance"] = $data["result"]["available_balance"];
+						$result['locked_amount'] = $data["result"]["locked_amount"];
 					}
 				}
 			}
